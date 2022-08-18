@@ -5,14 +5,16 @@ import {
     UserOutlined,
     VideoCameraOutlined,
 } from '@ant-design/icons';
-
+import logoURL from '../../../assets/images/logo.png' //引入大logo图片
 const { Sider } = Layout;//结构侧边栏UI结构
 
 function SideMenu() {
     const [collapsed] = useState(false);
     return (
         <Sider trigger={null} collapsible collapsed={collapsed}>
-            <div className="logo"></div>
+            <div className="logo">
+                <img style={{ width: '200px', height: '73px' }} src={logoURL} alt="" />
+            </div>
             <Menu
                 theme="light"
                 mode="inline"
