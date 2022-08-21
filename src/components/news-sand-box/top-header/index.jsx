@@ -8,21 +8,12 @@ import {
 const { Header } = Layout;
 //下拉菜单
 const menu = (
-    <Menu
-        items={[
-            {
-                key: '1',
-                label: (
-                    '超级管理员'
-                ),
-            },
-            {
-                key: '2',
-                danger: true,
-                label: '退出',
-            },
-        ]}
-    />
+    <Menu>
+        <Menu.Item>
+            超级管理员
+        </Menu.Item>
+        <Menu.Item danger>退出</Menu.Item>
+    </Menu>
 );
 function TopHeader() {
     const [collapsed, setCollapsed] = useState(false);

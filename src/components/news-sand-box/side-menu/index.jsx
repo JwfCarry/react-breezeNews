@@ -1,72 +1,68 @@
-import React, { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect, } from 'react'
+import { useNavigate, useLocation } from 'react-router-dom';
 import { Layout, Menu } from 'antd';
 import axios from 'axios';
 /* import {
-    UploadOutlined,
     UserOutlined,
 } from '@ant-design/icons'; */
 import logoURL from '../../../assets/images/logo.png' //引入大logo图片
 const { Sider } = Layout;//结构侧边栏UI结构
+const { SubMenu } = Menu
 //侧导航栏数据
-/* const menuList = [
-    {
-        key: '/home',
-        icon: <UserOutlined />,
-        label: '首页',
-    },
-    {
-        key: "/user-manage",
-        label: "用户管理",
-        icon: <UserOutlined />,
-        children: [
-            {
-                key: "/user-manage/list",
-                label: "用户列表",
-                icon: <UserOutlined />,
-            },
-        ],
-    },
-    {
-        key: '/right-manage',
-        icon: <UploadOutlined />,
-        label: '权限管理',
-        children: [{ label: '角色列表', key: '/right-manage/role/list', icon: <UploadOutlined /> },
-        {
-            key: "/right-manage/right/list",
-            label: "权限列表",
-            icon: <UploadOutlined />,
-        },
-        ]
-    },
-] */
-
+/* const iconList = {
+    "/home": <UserOutlined />,
+    "/user-manage": <UserOutlined />,
+    "/user-manage/list": <UserOutlined />,
+    "/right-manage": <UserOutlined />,
+    "/right-manage/role/list": <UserOutlined />,
+    "/right-manage/right/list": <UserOutlined />
+    //.......
+} */
 function SideMenu() {
     const [collapsed] = useState(false);
-    const [menuList, setMenuList] = useState()
+    const [menus, setMenuList] = useState([])
     let navigate = useNavigate()
+    let location = useLocation()
+    const selectKeys = [location.pathname]; // 路由路径
+    const openKeys = ["/" + location.pathname.split("/")[1]]; //截取外层一级路由路径
     useEffect(() => {
-        axios.get('http://localhost:3000/rights?_embed=children').then(res => {
+        axios.get('http://localhost:3001/rights?_embed=children').then(res => {
             setMenuList(res.data)
-            console.log(res.data);
         })
     }, [])
-    //点击侧边栏函数
-    const menuClick = (e) => {
-        navigate(e.key)
+    const checkPagePermission = (item) => {
+        return item.pagepermisson
+    }
+    //渲染数据
+    const renderMenu = (menuList) => {
+        return menuList.map(item => {
+            if (item.children?.length > 0 && checkPagePermission(item)) {
+                return <SubMenu key={item.key} title={item.title}>
+                    {renderMenu(item.children)}
+                </SubMenu>
+            }
+
+            return checkPagePermission(item) && <Menu.Item key={item.key} onClick={() => {
+                //  console.log(props)
+                navigate(item.key)
+            }}>{item.title}</Menu.Item>
+        })
     }
     return (
         <Sider trigger={null} collapsible collapsed={collapsed}>
-            <div className="logo">
-                <img style={{ width: '200px', height: '73px' }} src={logoURL} alt="" />
+            <div style={{ display: 'flex', 'flexDirection': 'column', height: '100%' }}>
+                <div className="logo">
+                    <img style={{ width: '200px', height: '73px' }} src={logoURL} alt="" />
+                </div>
+                <div style={{ flex: 1, 'overflow': 'auto' }}>
+                    <Menu
+                        theme="light"
+                        mode="inline"
+                        selectedKeys={selectKeys}
+                        defaultOpenKeys={openKeys}
+                    >  {renderMenu(menus)}</Menu>
+                </div>
             </div>
-            <Menu
-                theme="light"
-                mode="inline"
-                defaultSelectedKeys={['1']}
-                items={menuList}
-                onClick={menuClick}
-            />
         </Sider>
 
     )
