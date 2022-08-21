@@ -26,7 +26,7 @@ function SideMenu() {
     const selectKeys = [location.pathname]; // 路由路径
     const openKeys = ["/" + location.pathname.split("/")[1]]; //截取外层一级路由路径
     useEffect(() => {
-        axios.get('http://localhost:3001/rights?_embed=children').then(res => {
+        axios.get('http://localhost:3000/rights?_embed=children').then(res => {
             setMenuList(res.data)
         })
     }, [])
