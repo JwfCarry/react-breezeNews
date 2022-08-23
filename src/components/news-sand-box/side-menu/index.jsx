@@ -2,30 +2,29 @@ import React, { useState, useEffect, } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom';
 import { Layout, Menu } from 'antd';
 import axios from 'axios';
-/* import {
-    UserOutlined,
-} from '@ant-design/icons'; */
+import { UserOutlined, HomeOutlined, SolutionOutlined, CommentOutlined, ProjectOutlined, FileTextOutlined } from '@ant-design/icons';
 import logoURL from '../../../assets/images/logo.png' //引入大logo图片
 const { Sider } = Layout;//结构侧边栏UI结构
 const { SubMenu } = Menu
-//侧导航栏数据
-/* const iconList = {
-    "/home": <UserOutlined />,
-    "/user-manage": <UserOutlined />,
-    "/user-manage/list": <UserOutlined />,
-    "/right-manage": <UserOutlined />,
-    "/right-manage/role/list": <UserOutlined />,
-    "/right-manage/right/list": <UserOutlined />
-    //.......
-} */
 function SideMenu() {
-    const [collapsed] = useState(false);
-    const [menus, setMenuList] = useState([])
+    const [collapsed] = useState(false); //伸缩
+    const [menus, setMenuList] = useState([]) //侧边栏数据
     let navigate = useNavigate()
     let location = useLocation()
     const selectKeys = [location.pathname]; // 路由路径
     const openKeys = ["/" + location.pathname.split("/")[1]]; //截取外层一级路由路径
+    //侧导航栏数据
+    const iconList = {
+        "/home": <HomeOutlined />,
+        "/user-manage": <UserOutlined />,
+        "/news-manage": <FileTextOutlined />,
+        "/audit-manage": <ProjectOutlined />,
+        "/publish-manage": <CommentOutlined />,
+        "/right-manage": <SolutionOutlined />
+
+    }
     useEffect(() => {
+        //拿去侧边栏数据
         axios.get('http://localhost:3000/rights?_embed=children').then(res => {
             setMenuList(res.data)
         })
@@ -33,19 +32,20 @@ function SideMenu() {
     const checkPagePermission = (item) => {
         return item.pagepermisson
     }
-    //渲染数据
+    //渲染侧边栏数据
     const renderMenu = (menuList) => {
         return menuList.map(item => {
+            //如果是二级菜单
             if (item.children?.length > 0 && checkPagePermission(item)) {
-                return <SubMenu key={item.key} title={item.title}>
+                return <SubMenu key={item.key} title={item.title} icon={iconList[item.key]}>
                     {renderMenu(item.children)}
                 </SubMenu>
             }
-
+            //只有一级菜单  ：首页
             return checkPagePermission(item) && <Menu.Item key={item.key} onClick={() => {
                 //  console.log(props)
                 navigate(item.key)
-            }}>{item.title}</Menu.Item>
+            }} icon={iconList[item.key]}>{item.title}</Menu.Item>
         })
     }
     return (

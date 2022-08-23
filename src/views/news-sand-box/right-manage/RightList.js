@@ -10,7 +10,7 @@ function RightList() {
             title: 'Id',
             dataIndex: 'id',
             render: (id) => {
-                return <h4>{id}</h4>
+                return <b>{id}</b>
             }
         },
         {
@@ -33,7 +33,7 @@ function RightList() {
                     </div>} title="页面配置项" trigger={item.pagepermisson === undefined ? '' : 'click'}>
                         <Button type="primary" shape="circle" icon={<EditOutlined />} disabled={item.pagepermisson === undefined} style={{ marginRight: '10px' }} />
                     </Popover>
-                    <Button danger shape="circle" icon={<DeleteOutlined />} onClick={() => showConfirmDelete(item)}></Button>
+                    <Button danger shape="circle" icon={<DeleteOutlined />} onClick={() => showConfirmDelete(item)} />
                 </div>
             }
         },
@@ -58,7 +58,8 @@ function RightList() {
             title: '确定要删除吗？',
             icon: <ExclamationCircleOutlined />,
             content: '删除此用户权限',
-
+            okText: '确定',
+            cancelText: '取消',
             onOk() { //确定删除
                 deleteHandle(item)
             },
@@ -72,12 +73,12 @@ function RightList() {
     const deleteHandle = (item) => {
         if (item.grade === 1) { //如果是一级路由
             setDataSource(dataSource.filter(data => data.id !== item.id)); //页面同步
-            axios.delete(`  http://localhost:3000/rights/${item.id}`); //后端删除
+            axios.delete(`http://localhost:3000/rights/${item.id}`)//后端删除
         } else {  //如果是二级子路由
             let list = dataSource.filter(data => data.id === item.rightId)//找出所属一级路由
             list[0].children = list[0].children.filter(data => data.id !== item.id)
             setDataSource([...dataSource]); //页面更新
-            axios.delete(`http://localhost:3000/children/${item.id}`); //后端更新
+            axios.delete(`http://localhost:3000/children/${item.id}`) //后端更新
         }
     }
     useEffect(() => {
