@@ -7,7 +7,7 @@ function RightList() {
     const [dataSource, setDataSource] = useState([]) //表格数据
     const columns = [
         {
-            title: 'Id',
+            title: 'ID',
             dataIndex: 'id',
             render: (id) => {
                 return <b>{id}</b>
@@ -26,6 +26,7 @@ function RightList() {
         },
         {
             title: '操作',
+            align: 'center',
             render: (item) => {
                 return <div>
                     <Popover content={<div style={{ textAlign: "center" }}>
@@ -38,6 +39,13 @@ function RightList() {
             }
         },
     ];
+    useEffect(() => {
+        axios.get('http://localhost:3000/rights?_embed=children').then(res => {
+            res.data.forEach((item) => item.children?.length === 0 ? item.children = "" : item.children); //剔除首页的children
+            setDataSource(res.data)
+        })
+    }, [])
+
     //开关用户功能权限
     const switchMethod = (item) => {
         item.pagepermisson = item.pagepermisson === 1 ? 0 : 1
@@ -81,17 +89,11 @@ function RightList() {
             axios.delete(`http://localhost:3000/children/${item.id}`) //后端更新
         }
     }
-    useEffect(() => {
-        axios.get('http://localhost:3000/rights?_embed=children').then(res => {
-            res.data.forEach((item) => item.children?.length === 0 ? item.children = "" : item.children); //剔除首页的children
-            setDataSource(res.data)
-        })
-    }, [])
 
     return (
         <Table dataSource={dataSource} columns={columns} pagination={
             { pageSize: 5 }
-        } />
+        } bordered={true} />
     )
 }
 export default RightList

@@ -19,15 +19,6 @@
       "id": 2
     },
     {
-      "username": "钢蛋",
-      "password": "123",
-      "roleState": true,
-      "default": false,
-      "region": "南极洲",
-      "roleId": 2,
-      "id": 3
-    },
-    {
       "username": "诸葛山珍",
       "password": "123",
       "roleState": true,
@@ -71,6 +62,15 @@
       "region": "亚洲",
       "roleId": 3,
       "id": 8
+    },
+    {
+      "username": "test",
+      "password": "2132",
+      "region": "亚洲",
+      "roleId": 2,
+      "roleState": true,
+      "default": false,
+      "id": 9
     }
   ],
   "roles": [
@@ -79,6 +79,18 @@
       "roleName": "超级管理员",
       "roleType": 1,
       "rights": [
+        "/user-manage",
+        "/user-manage/add",
+        "/user-manage/delete",
+        "/user-manage/update",
+        "/user-manage/list",
+        "/right-manage",
+        "/right-manage/role/list",
+        "/right-manage/right/list",
+        "/right-manage/role/update",
+        "/right-manage/role/delete",
+        "/right-manage/right/update",
+        "/right-manage/right/delete",
         "/news-manage",
         "/news-manage/list",
         "/news-manage/add",
@@ -93,19 +105,7 @@
         "/publish-manage/unpublished",
         "/publish-manage/published",
         "/publish-manage/sunset",
-        "/right-manage",
-        "/right-manage/role/list",
-        "/right-manage/right/list",
-        "/right-manage/role/update",
-        "/right-manage/role/delete",
-        "/right-manage/right/update",
-        "/right-manage/right/delete",
-        "/home",
-        "/user-manage",
-        "/user-manage/add",
-        "/user-manage/delete",
-        "/user-manage/update",
-        "/user-manage/list"
+        "/home"
       ]
     },
     {
