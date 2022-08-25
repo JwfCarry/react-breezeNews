@@ -8,9 +8,9 @@ module.exports = {
                 lessLoaderOptions: {
                     lessOptions: {
                         modifyVars: {
-                            '@primary-color': '#5030e5',// 全局主色
-                            '@link-color': '#5030e5', // 链接色
-                            '@success-color': '#5030e5', // 成功色
+                            '@primary-color': '#7546c9',// 全局主色
+                            '@link-color': '#7546c9', // 链接色
+                            '@success-color': '#7546c9', // 成功色
                             '@warning-color': '#faad14', // 警告色
                             '@error-color': '#f5222d', // 错误色
                             '@font-size-base': '14px', // 主字号

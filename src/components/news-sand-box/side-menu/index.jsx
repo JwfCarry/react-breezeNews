@@ -29,19 +29,20 @@ function SideMenu() {
             setMenuList(res.data)
         })
     }, [])
+    const { role: { rights } } = JSON.parse(localStorage.getItem('token')); //获取用户所有的使用权限 （侧边栏）
     const checkPagePermission = (item) => {
-        return item.pagepermisson
+        return item.pagepermisson && rights.includes(item.key) //跟全部权限比较 判断是否有 可以展示的权限
     }
     //渲染侧边栏数据
     const renderMenu = (menuList) => {
         return menuList.map(item => {
-            //如果是二级菜单
+
             if (item.children?.length > 0 && checkPagePermission(item)) {
                 return <SubMenu key={item.key} title={item.title} icon={iconList[item.key]}>
                     {renderMenu(item.children)}
                 </SubMenu>
             }
-            //只有一级菜单  ：首页
+
             return checkPagePermission(item) && <Menu.Item key={item.key} onClick={() => {
                 //  console.log(props)
                 navigate(item.key)

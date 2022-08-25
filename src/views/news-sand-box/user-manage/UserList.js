@@ -80,7 +80,19 @@ function UserList() {
             }
         },
     ];
+    const { roleId, region, username } = JSON.parse(localStorage.getItem('token')); //拿取用户信息
     //拿取后端数据
+    useEffect(() => {
+        //表格数据
+        axios.get('http://localhost:3000/users?_expand=role').then(res => {
+            const list = res.data;
+            //这里判断是什么管理员 返回相应的权限 超级管理员拥有所有成员  区域管理员拥有区域所有成员(包括编辑)  编辑只有自己
+            //1: 超级管理员  2： 区域管理员 3：编辑 
+            setDataSource(roleId === 1 ? list : [...list.filter(item => item.username === username),
+            ...list.filter(item => item.region === region && item.roleId === 3)
+            ])
+        });
+    }, [refresh, roleId, region, username])
     useEffect(() => {
         //区域选择框数据
         axios.get("http://localhost:3000/regions").then(res => {
@@ -93,12 +105,7 @@ function UserList() {
             setRoleList(list)
         })
     }, [])
-    useEffect(() => {
-        //表格数据
-        axios.get('http://localhost:3000/users?_expand=role').then(res => {
-            setDataSource(res.data)
-        });
-    }, [refresh])
+
     //删除对话框 
     const showConfirmDelete = (item) => {
         confirm({
@@ -126,7 +133,7 @@ function UserList() {
     //确定删除事件
     const deleteHandle = (item) => {
         setDataSource(dataSource.filter(data => data.id !== item.id)); //删除此用户 视图更新
-        axios.delete(`http://localhost:3000/users/${item.id}`).then(refresh) //后端删除 重新请求
+        axios.delete(`http://localhost:3000/users/${item.id}`).then(setRefresh) //后端删除 重新请求
     }
     //添加用户 [确定]按钮事件
     const addHandleOk = () => {
@@ -143,9 +150,8 @@ function UserList() {
     //更新用户edit按钮事件
     const showUpdate = (item) => {
         //这里使用setTimeout 解决react更新不是同步的问题
+        setIsUpdateVisible(true); //展示更新用户对话框
         setTimeout(() => {
-            setIsUpdateVisible(true); //展示更新用户对话框
-
             updateForm.current.setFieldsValue(item) //设置表单内容 根据传入的当前item项
             setCurrentUserID(item.id) //获取当前项id
         }, 0)
@@ -173,7 +179,7 @@ function UserList() {
             <Modal title="更新用户" visible={isUpdateVisible} onOk={updateHandleOk} onCancel={() => { setIsUpdateVisible(false) }}
                 okText={'更新'} cancelText={'取消'}
             >
-                <UserForm roleList={roleList} regionList={regionList} ref={updateForm} />
+                <UserForm roleList={roleList} regionList={regionList} ref={updateForm} isUpdate={true} />
             </Modal>
         </div>
     )
