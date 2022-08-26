@@ -84,7 +84,7 @@ function UserList() {
     //拿取后端数据
     useEffect(() => {
         //表格数据
-        axios.get('http://localhost:3000/users?_expand=role').then(res => {
+        axios.get('/users?_expand=role').then(res => {
             const list = res.data;
             //这里判断是什么管理员 返回相应的权限 超级管理员拥有所有成员  区域管理员拥有区域所有成员(包括编辑)  编辑只有自己
             //1: 超级管理员  2： 区域管理员 3：编辑 
@@ -95,12 +95,12 @@ function UserList() {
     }, [refresh, roleId, region, username])
     useEffect(() => {
         //区域选择框数据
-        axios.get("http://localhost:3000/regions").then(res => {
+        axios.get("/regions").then(res => {
             const list = res.data
             setreGionList(list)
         })
         //角色选择框数据
-        axios.get("http://localhost:3000/roles").then(res => {
+        axios.get("/roles").then(res => {
             const list = res.data
             setRoleList(list)
         })
@@ -126,21 +126,21 @@ function UserList() {
     //用户状态siwch开关 事件
     const switchChange = (item) => {
         item.roleState = !item.roleState
-        axios.patch(`http://localhost:3000/users/${item.id}`, {
+        axios.patch(`/users/${item.id}`, {
             roleState: item.roleState
         }).then(setRefresh)
     }
     //确定删除事件
     const deleteHandle = (item) => {
         setDataSource(dataSource.filter(data => data.id !== item.id)); //删除此用户 视图更新
-        axios.delete(`http://localhost:3000/users/${item.id}`).then(setRefresh) //后端删除 重新请求
+        axios.delete(`/users/${item.id}`).then(setRefresh) //后端删除 重新请求
     }
     //添加用户 [确定]按钮事件
     const addHandleOk = () => {
         addForm.current.validateFields().then((value) => {
             setIsModalVisible(false) //关闭弹窗
             addForm.current.resetFields() //清空表单数据
-            axios.post(`http://localhost:3000/users`, { //像后端添加用户数据
+            axios.post(`/users`, { //像后端添加用户数据
                 ...value,
                 'roleState': true,
                 'default': false
@@ -160,7 +160,7 @@ function UserList() {
     const updateHandleOk = () => {
         updateForm.current.validateFields().then((value) => {
             setIsUpdateVisible(false) //关闭弹窗
-            axios.patch(`http://localhost:3000/users/${currentUserID}`, {
+            axios.patch(`/users/${currentUserID}`, {
                 ...value
             }).then(setRefresh)
         })

@@ -8,7 +8,7 @@ export default function Login() {
     let navigate = useNavigate()
     //  登录校验
     const onFinish = (values) => {
-        axios.get(`http://localhost:3000/users?username=${values.username}&${values.password}&roleState=true&_expand=role`).then(res => {
+        axios.get(`/users?username=${values.username}&${values.password}&roleState=true&_expand=role`).then(res => {
             if (res.data.length === 0) {
                 message.error('用户名或密码错误！')
             } else {

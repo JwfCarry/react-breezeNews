@@ -40,7 +40,7 @@ function RightList() {
         },
     ];
     useEffect(() => {
-        axios.get('http://localhost:3000/rights?_embed=children').then(res => {
+        axios.get('/rights?_embed=children').then(res => {
             res.data.forEach((item) => item.children?.length === 0 ? item.children = "" : item.children); //剔除首页的children
             setDataSource(res.data)
         })
@@ -51,11 +51,11 @@ function RightList() {
         item.pagepermisson = item.pagepermisson === 1 ? 0 : 1
         setDataSource([...dataSource]) //页面更新
         if (item.grade === 1) { //一级路由
-            axios.patch(`http://localhost:3000/rights/${item.id}`, {
+            axios.patch(`/rights/${item.id}`, {
                 pagepermisson: item.pagepermisson
             })
         } else { //二级路由
-            axios.patch(`http://localhost:3000/children/${item.id}`, {
+            axios.patch(`/children/${item.id}`, {
                 pagepermisson: item.pagepermisson
             })
         }
@@ -81,12 +81,12 @@ function RightList() {
     const deleteHandle = (item) => {
         if (item.grade === 1) { //如果是一级路由
             setDataSource(dataSource.filter(data => data.id !== item.id)); //页面同步
-            axios.delete(`http://localhost:3000/rights/${item.id}`)//后端删除
+            axios.delete(`/rights/${item.id}`)//后端删除
         } else {  //如果是二级子路由
             let list = dataSource.filter(data => data.id === item.rightId)//找出所属一级路由
             list[0].children = list[0].children.filter(data => data.id !== item.id)
             setDataSource([...dataSource]); //页面更新
-            axios.delete(`http://localhost:3000/children/${item.id}`) //后端更新
+            axios.delete(`/children/${item.id}`) //后端更新
         }
     }
 

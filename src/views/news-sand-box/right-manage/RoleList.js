@@ -13,11 +13,11 @@ function RoleList() {
     //从后端拿取数据
     useEffect(() => {
         //表格数据
-        axios.get('http://localhost:3000/roles').then(res => {
+        axios.get('/roles').then(res => {
             setDataSource(res.data)
         })
         //树形结构数据
-        axios.get('http://localhost:3000/rights?_embed=children').then(res => {
+        axios.get('/rights?_embed=children').then(res => {
             setTreeData(res.data)
         })
     }, [refresh])
@@ -66,12 +66,12 @@ function RoleList() {
     };
     //确定删除事件
     const deleteHandle = (item) => {
-        axios.delete(`http://localhost:3000/roles/${item.id}`).then(setRefresh)//后端删除 重新请求
+        axios.delete(`/roles/${item.id}`).then(setRefresh)//后端删除 重新请求
     }
     //权限分配确定
     const handleOk = () => {
         setIsModalVisible(false) //关闭弹窗
-        axios.patch(`http://localhost:3000/roles/${currentId}`, {
+        axios.patch(`/roles/${currentId}`, {
             rights: currentData
         }).then(setRefresh).catch((e) => { console.log(e) })
     }

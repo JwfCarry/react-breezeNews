@@ -113,6 +113,10 @@
       "roleName": "区域管理员",
       "roleType": 2,
       "rights": [
+        "/publish-manage",
+        "/publish-manage/unpublished",
+        "/publish-manage/published",
+        "/publish-manage/sunset",
         "/home",
         "/user-manage",
         "/user-manage/add",
@@ -126,13 +130,9 @@
         "/news-manage/preview/:id",
         "/news-manage/draft",
         "/news-manage/category",
-        "/audit-manage",
-        "/audit-manage/audit",
         "/audit-manage/list",
-        "/publish-manage",
-        "/publish-manage/unpublished",
-        "/publish-manage/published",
-        "/publish-manage/sunset"
+        "/audit-manage/audit",
+        "/audit-manage"
       ]
     },
     {

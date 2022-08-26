@@ -1,4 +1,4 @@
-/* 路由配置文件 */
+/* 路由配置文件  登录&系统首页*/
 import React from 'react'
 import { HashRouter, Routes, Route, Navigate } from 'react-router-dom'
 import Login from '../views/login'
