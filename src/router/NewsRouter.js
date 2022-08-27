@@ -10,6 +10,7 @@ import UserList from '../views/news-sand-box/user-manage/UserList'
 import NewsCategory from "../views/news-sand-box/news-manage/NewsCategory";
 import NewsAdd from "../views/news-sand-box/news-manage/NewsAdd";
 import NewsDraft from "../views/news-sand-box/news-manage/NewsDraft";
+import NewsPreview from '../views/news-sand-box/news-manage/NewsPreview';
 import Audit from "../views/news-sand-box/audit-manage/Audit";
 import AuditList from "../views/news-sand-box/audit-manage/AuditList";
 import Unpublished from "../views/news-sand-box/publish-manage/Unpublished";
@@ -25,6 +26,7 @@ const LocalRouterMap = {
     "/news-manage/add": <NewsAdd />,
     "/news-manage/draft": <NewsDraft />,
     "/news-manage/category": <NewsCategory />,
+    "/news-manage/preview/:id": <NewsPreview />,
     "/audit-manage/audit": <Audit />,
     "/audit-manage/list": <AuditList />,
     "/publish-manage/unpublished": <Unpublished />,
@@ -44,9 +46,9 @@ function NewsRouter() {
             setBackRouteList([...res[0].data, ...res[1].data]);  //将所有路由合并成一个数组
         });
     }, [])
-    // 将没有配置的路由过滤（后端返回的路由有一部分在此系统中没有配置） && 权限是否开启显示
+    // 将没有配置的路由过滤（后端返回的路由有一部分在此系统侧边栏中没有配置） && 权限是否开启显示||新闻预览界面
     const checkRoute = (item) => {
-        return LocalRouterMap[item.key] && item.pagepermisson
+        return LocalRouterMap[item.key] && (item.pagepermisson || item.routepermisson)
     }
     //用户权限与全部权限相匹配 有的话返回true
     const checkUserPermission = (item) => {
