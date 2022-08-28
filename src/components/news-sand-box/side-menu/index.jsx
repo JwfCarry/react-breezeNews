@@ -11,7 +11,7 @@ function SideMenu() {
     const [menus, setMenuList] = useState([]) //侧边栏数据
     let navigate = useNavigate()
     let location = useLocation()
-    const selectKeys = [location.pathname]; // 路由路径
+    const selectKeys = [location.pathname]; // 当前路由路径
     const openKeys = ["/" + location.pathname.split("/")[1]]; //截取外层一级路由路径
     //侧导航栏数据
     const iconList = {

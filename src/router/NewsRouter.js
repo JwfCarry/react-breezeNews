@@ -11,6 +11,7 @@ import NewsCategory from "../views/news-sand-box/news-manage/NewsCategory";
 import NewsAdd from "../views/news-sand-box/news-manage/NewsAdd";
 import NewsDraft from "../views/news-sand-box/news-manage/NewsDraft";
 import NewsPreview from '../views/news-sand-box/news-manage/NewsPreview';
+import NewsUpdate from '../views/news-sand-box/news-manage/NewsUpdate'
 import Audit from "../views/news-sand-box/audit-manage/Audit";
 import AuditList from "../views/news-sand-box/audit-manage/AuditList";
 import Unpublished from "../views/news-sand-box/publish-manage/Unpublished";
@@ -27,6 +28,7 @@ const LocalRouterMap = {
     "/news-manage/draft": <NewsDraft />,
     "/news-manage/category": <NewsCategory />,
     "/news-manage/preview/:id": <NewsPreview />,
+    "/news-manage/update/:id": <NewsUpdate />,
     "/audit-manage/audit": <Audit />,
     "/audit-manage/list": <AuditList />,
     "/publish-manage/unpublished": <Unpublished />,

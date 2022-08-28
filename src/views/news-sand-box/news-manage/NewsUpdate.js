@@ -1,19 +1,20 @@
+/* 新闻更新界面 非侧边栏路由界面 */
 import React, { useState, useEffect, useRef } from 'react'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import NewsEditor from '../../../components/news-manage/NewsEditor';
 import { PageHeader, Steps, Button, Form, Input, Select, message, notification } from 'antd'
 import style from './News.module.css'
 import axios from 'axios';
 const { Step } = Steps;
 const { Option } = Select
-function NewsAdd() {
+function NewsUpdate() {
     const [current, setCurrent] = useState(0) //当前步骤 
     const [categoryList, setCategoryList] = useState([]); //新闻分类选择框数据
     const [newsTitleAndCategory, setNewsTitleAndCategory] = useState([]);//新闻标题与类别数据
     const [newsContent, setNewsContent] = useState('')
-    const formRef = useRef(null) //表单实例
-    const User = JSON.parse(localStorage.getItem("token")) //拿去登录用户信息
+    const NewsForm = useRef(null) //表单实例
     const navigate = useNavigate() //路由跳转
+    let params = useParams() //路由跳转参数 主要拿取新闻ID
     //拿取后端数据
     useEffect(() => {
         //新闻分类选择框数据
@@ -21,11 +22,24 @@ function NewsAdd() {
             setCategoryList(res.data)
         })
     }, [])
+    useEffect(() => {
+        //根据路由传过来的参数：id   拿取新数据
+        axios.get(`/news/${params.id}?_expand=category&_expand=role`).then(res => {
+            // console.log(res.data);
+            let { title, categoryId, content } = res.data
+            NewsForm.current.setFieldsValue({ //将新闻数据 填进表单
+                title,
+                categoryId
+            })
+            setNewsContent(content)
+
+        })
+    }, [params.id])
     //下一步按钮
     const handleNext = () => {
         if (current === 0) { //如果是第一步
             //表单验证是否放行
-            formRef.current.validateFields().then((res) => {
+            NewsForm.current.validateFields().then((res) => {
                 setNewsTitleAndCategory(res) //存储新闻标题与类别数据
                 setCurrent(current + 1)
             }).catch((err) => {
@@ -47,12 +61,9 @@ function NewsAdd() {
     }
     //保存到草稿箱或者是提交审核
     const handleSave = (auditState) => {
-        axios.post('/news', {
+        axios.patch(`/news/${params.id}`, {
             ...newsTitleAndCategory,
             "content": newsContent,
-            "region": User.region ? User.region : "全球",
-            "author": User.username,
-            "roleId": User.roleId,
             "auditState": auditState,
             "publishState": 0,
             "createTime": Date.now(),
@@ -60,7 +71,7 @@ function NewsAdd() {
             "view": 0,
             // "publishTime": 0
         }).then(res => {
-            //草稿箱页面 :审核列表页面
+            //草稿箱页面 :审核列表
             navigate(auditState === 0 ? '/news-manage/draft' : '/audit-manage/list')
 
             notification['success']({
@@ -71,8 +82,8 @@ function NewsAdd() {
                     </div>
                 ),
                 placement: "topRight",
-                duration: '2.5',
-                top: '60px'
+                duration: '3',
+                top: '50px'
             });
         })
     }
@@ -80,8 +91,9 @@ function NewsAdd() {
         <div>
             {/* 顶部文字 */}
             <PageHeader
+                onBack={() => window.history.back()}
                 className="site-page-header"
-                title="撰写新闻"
+                title="更新新闻"
             />
             {/* 顶部步骤条 */}
             <Steps current={current}>
@@ -94,7 +106,7 @@ function NewsAdd() {
             <div style={{ marginTop: '20px' }}>
                 <div className={current === 0 ? '' : style.noactive}>
                     <Form
-                        ref={formRef}
+                        ref={NewsForm}
                         name="basic"
                         labelCol={{
                             span: 2,
@@ -144,7 +156,7 @@ function NewsAdd() {
                 <div className={current === 1 ? '' : style.noactive}>
                     <NewsEditor getContent={(content) => {
                         setNewsContent(content)
-                    }}></NewsEditor>
+                    }} content={newsContent}></NewsEditor>
                 </div>
                 <div className={current === 2 ? '' : style.noactive}></div>
             </div>
@@ -166,4 +178,4 @@ function NewsAdd() {
         </div>
     )
 }
-export default NewsAdd
+export default NewsUpdate
