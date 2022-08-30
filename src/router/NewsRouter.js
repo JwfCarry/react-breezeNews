@@ -7,7 +7,6 @@ import Nopermission from '../views/news-sand-box/nopermission/Nopermission'
 import RightList from '../views/news-sand-box/right-manage/RightList'
 import RoleList from '../views/news-sand-box/right-manage/RoleList'
 import UserList from '../views/news-sand-box/user-manage/UserList'
-import NewsCategory from "../views/news-sand-box/news-manage/NewsCategory";
 import NewsAdd from "../views/news-sand-box/news-manage/NewsAdd";
 import NewsDraft from "../views/news-sand-box/news-manage/NewsDraft";
 import NewsPreview from '../views/news-sand-box/news-manage/NewsPreview';
@@ -26,7 +25,6 @@ const LocalRouterMap = {
     "/right-manage/right/list": <RightList />,
     "/news-manage/add": <NewsAdd />,
     "/news-manage/draft": <NewsDraft />,
-    "/news-manage/category": <NewsCategory />,
     "/news-manage/preview/:id": <NewsPreview />,
     "/news-manage/update/:id": <NewsUpdate />,
     "/audit-manage/audit": <Audit />,

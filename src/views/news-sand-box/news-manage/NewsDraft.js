@@ -84,13 +84,12 @@ function NewsDraft() {
     const deleteUp = (id) => {
         axios.patch(`/news/${id}`, {
             auditState: 1
-        }).then(() => {
-            navigate('/audit-manage/list')
+        }).then(setRefresh).then(() => {
             notification['success']({
                 message: `系统消息`,
                 description: (
                     <div>
-                        操作成功！您可以到<span style={{ color: '#7546c9' }}>审核列表</span>中查看您的新闻。
+                        操作成功！您可以到<span style={{ color: '#7546c9' }}>审核管理/审核列表</span>中查看您的新闻。
                     </div>
                 ),
                 placement: "topRight",
