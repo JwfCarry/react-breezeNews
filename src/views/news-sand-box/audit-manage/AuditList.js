@@ -1,5 +1,6 @@
 /* 审核列表 */
 /*auditState: 0 未审核 1 审核中  2 已通过 3 未通过 */
+/* publishState  0未发布  1 待发布  2 已发布  3 已下线 */
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router'
 import { Table, Button, Tag, Modal, notification } from 'antd'
@@ -11,7 +12,7 @@ function AuditList() {
     const { username } = JSON.parse(localStorage.getItem("token")) //用户数据
     const [refresh, setRefresh] = useState(false)
     let navigate = useNavigate()
-    useEffect(() => {
+    useEffect(() => {    //auditState   0 草稿箱 1 审核中 2 已通过 3未通过      
         //拿取数据     新闻列表中 用户自己&状态不为【未审核0】&发布状态为【未发布0、待发布1】     ne：不等于 lte：小于等于
         axios(`/news?author=${username}&auditState_ne=0&publishState_lte=1&_expand=category`).then(res => {
             console.log(res.data)

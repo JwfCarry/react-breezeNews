@@ -5,6 +5,8 @@ import { DeleteOutlined, EditOutlined, UploadOutlined, ExclamationCircleOutlined
 import axios from 'axios'
 const { confirm } = Modal
 function NewsDraft() {
+    /*auditState: 0 未审核 1 审核中  2 已通过 3 未通过 */
+    /* publishState  0未发布  1 待发布  2 已发布  3 已下线 */
     const { username } = JSON.parse(localStorage.getItem("token")) //拿取登录用户名
     const [dataSource, setdataSource] = useState([])  //表格数据
     const [refresh, setRefresh] = useState(false) //自动刷新
