@@ -61,6 +61,10 @@ function Audit() {
         }
     ];
     const handleAudit = (item, auditState, publishState) => {
+
+
+
+
         axios.patch(`/news/${item.id}`, {
             auditState,
             publishState

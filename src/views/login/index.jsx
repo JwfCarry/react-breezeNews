@@ -4,7 +4,7 @@ import { Form, Button, Input, message } from 'antd'
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import './index.less'
 import axios from 'axios';
-export default function Login() {
+function Login() {
     let navigate = useNavigate()
     //  登录校验
     const onFinish = (values) => {
@@ -19,7 +19,6 @@ export default function Login() {
     }
     return (
         <div style={{ background: 'rgb(35, 39, 65)', height: "100%" }}>
-
             <div className="formContainer">
                 <div className="logintitle">全球新闻发布管理系统</div>
                 <Form
@@ -53,3 +52,4 @@ export default function Login() {
         </div>
     )
 }
+export default Login

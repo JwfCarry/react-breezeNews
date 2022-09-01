@@ -1,4 +1,6 @@
-import React, { useState } from 'react'
+import React from 'react'
+import { observer } from 'mobx-react-lite'
+import { useStore } from '../../../store/index'  //导入Mobx数据
 import { useNavigate } from 'react-router-dom';
 import { Layout, Dropdown, Menu, Avatar } from 'antd';
 import {
@@ -8,7 +10,8 @@ import {
 } from '@ant-design/icons';
 const { Header } = Layout;
 function TopHeader() {
-    const [collapsed, setCollapsed] = useState(false); //顶部收缩按钮
+    const store = useStore()
+    let collapsed = store.collapsedStore.collapsed //状态栏数据
     let navigate = useNavigate()// 路由跳转
     const { role: { roleName }, username } = JSON.parse(localStorage.getItem('token')) //获取当前登录信息
     //下拉菜单项数据
@@ -27,7 +30,7 @@ function TopHeader() {
         <Header className="site-layout-background" style={{ padding: '0 16px' }}>
             {React.createElement(collapsed ? MenuUnfoldOutlined : MenuFoldOutlined, {
                 className: 'trigger',
-                onClick: () => setCollapsed(!collapsed),
+                onClick: () => store.collapsedStore.changeCollapsed(),
             })}
             {/* 右侧个人头像结构 */}
             <div style={{ float: 'right' }}>
@@ -40,4 +43,4 @@ function TopHeader() {
         </Header>
     )
 }
-export default TopHeader
+export default observer(TopHeader)

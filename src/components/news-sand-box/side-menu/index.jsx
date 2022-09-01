@@ -1,13 +1,17 @@
 import React, { useState, useEffect, } from 'react'
+import { observer } from 'mobx-react-lite'
+import { useStore } from '../../../store/index'  //导入Mobx数据
 import { useNavigate, useLocation } from 'react-router-dom';
 import { Layout, Menu } from 'antd';
 import axios from 'axios';
 import { UserOutlined, HomeOutlined, SolutionOutlined, CommentOutlined, ProjectOutlined, FileTextOutlined } from '@ant-design/icons';
 import logoURL from '../../../assets/images/logo.png' //引入大logo图片
+import logoURLs from '../../../assets/images/logoshousuo.png' //引入小Logo
 const { Sider } = Layout;//结构侧边栏UI结构
 const { SubMenu } = Menu
 function SideMenu() {
-    const [collapsed] = useState(false); //伸缩
+    const store = useStore();
+    let collapsed = store.collapsedStore.collapsed //状态栏数据
     const [menus, setMenuList] = useState([]) //侧边栏数据
     let navigate = useNavigate()
     let location = useLocation()
@@ -53,7 +57,9 @@ function SideMenu() {
         <Sider trigger={null} collapsible collapsed={collapsed}>
             <div style={{ display: 'flex', 'flexDirection': 'column', height: '100%' }}>
                 <div className="logo">
-                    <img style={{ width: '200px', height: '73px' }} src={logoURL} alt="" />
+                    {
+                        collapsed ? <img style={{ width: '77px', height: '73px' }} src={logoURLs} alt="" /> : <img style={{ width: '200px', height: '73px' }} src={logoURL} alt="" />
+                    }
                 </div>
                 <div style={{ flex: 1, 'overflow': 'auto' }}>
                     <Menu
@@ -68,4 +74,4 @@ function SideMenu() {
 
     )
 }
-export default SideMenu
+export default observer(SideMenu)
