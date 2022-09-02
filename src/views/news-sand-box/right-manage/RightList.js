@@ -8,6 +8,7 @@ function RightList() {
     const columns = [
         {
             title: 'ID',
+            align: 'center',
             dataIndex: 'id',
             render: (id) => {
                 return <b>{id}</b>
@@ -15,10 +16,12 @@ function RightList() {
         },
         {
             title: '权限名称',
+            align: 'center',
             dataIndex: 'title',
         },
         {
             title: '权限路径',
+            align: 'center',
             dataIndex: 'key',
             render: (key) => {
                 return <Tag color="purple">{key}</Tag>

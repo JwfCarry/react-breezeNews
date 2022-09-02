@@ -24,12 +24,14 @@ function RoleList() {
     const columns = [{    //表格列配置项
         title: 'ID',
         dataIndex: 'id',
+        align: 'center',
         render: (id) => {
             return <b>{id}</b>
         }
     },
     {
         title: '角色名称',
+        align: 'center',
         dataIndex: 'roleName',
     }, {
         title: '操作',

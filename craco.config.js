@@ -19,7 +19,7 @@ module.exports = {
                             '@text-color-secondary': 'rgba(0, 0, 0, 0.45)', // 次文本色
                             '@disabled-color': 'rgba(0, 0, 0, 0.25)',// 失效色
                             '@border-radius-base': '15px',// 组件/浮层圆角
-                            '@border-color-base': '#dbdbdb', // 边框色
+                            '@border-color-base': '#a0a0a0', // 边框色
                             '@box-shadow-base': '0 2px 8px rgba(0, 0, 0, 0.15)' // 浮层阴影
                         },
                         javascriptEnabled: true,

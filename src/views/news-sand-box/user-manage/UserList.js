@@ -18,6 +18,7 @@ function UserList() {
         {
             title: '区域',
             dataIndex: 'region',
+            align: 'center',
             filterIcon: (filtered) => (
                 <SearchOutlined
                     style={{
@@ -49,12 +50,14 @@ function UserList() {
         {
             title: '角色名称',
             dataIndex: 'role',
+            align: 'center',
             render: (role) => {
                 return <p>{role?.roleName}</p>
             }
         },
         {
             title: '用户名',
+            align: 'center',
             dataIndex: 'username',
             render: (username) => {
                 return <Tag color="purple">{username}</Tag>
@@ -62,6 +65,7 @@ function UserList() {
         },
         {
             title: '用户状态',
+
             align: 'center',
             dataIndex: 'roleState',
             render: (roleState, item) => {

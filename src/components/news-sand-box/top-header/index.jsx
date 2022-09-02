@@ -3,6 +3,7 @@ import { observer } from 'mobx-react-lite'
 import { useStore } from '../../../store/index'  //导入Mobx数据
 import { useNavigate } from 'react-router-dom';
 import { Layout, Dropdown, Menu, Avatar } from 'antd';
+import { DownOutlined, GithubOutlined } from '@ant-design/icons'
 import {
     MenuFoldOutlined,
     MenuUnfoldOutlined,
@@ -34,10 +35,16 @@ function TopHeader() {
             })}
             {/* 右侧个人头像结构 */}
             <div style={{ float: 'right' }}>
-                <span>欢迎{username}回来</span>
+                <a target="_blank" rel='noopener noreferrer' href='https://github.com/JwfCarry/react-breezeNews'><GithubOutlined style={{ marginRight: '15px', fontSize: '20px', color: 'black', }} /></a>
+                <span style={{ marginRight: '10px' }}>欢迎您,<span style={{ color: '#5e17eb', marginLeft: '3px' }}>{username}</span></span>
                 <Dropdown overlay={menu}>
-                    <Avatar size="large" icon={<UserOutlined />} />
+                    <a href='javascipt:;'>
+                        <Avatar size="large" icon={<UserOutlined />} src='https://joeschmoe.io/api/v1/random' />
+                        <DownOutlined />
+                    </a>
+
                 </Dropdown>
+
             </div>
 
         </Header>
