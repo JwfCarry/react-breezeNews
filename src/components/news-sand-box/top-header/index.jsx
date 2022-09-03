@@ -39,7 +39,7 @@ function TopHeader() {
                 <span style={{ marginRight: '10px' }}>欢迎您,<span style={{ color: '#5e17eb', marginLeft: '3px' }}>{username}</span></span>
                 <Dropdown overlay={menu}>
                     <a href='javascipt:;'>
-                        <Avatar size="large" icon={<UserOutlined />} src='https://joeschmoe.io/api/v1/random' />
+                        <Avatar size={35} icon={<UserOutlined />} src='https://joeschmoe.io/api/v1/random' />
                         <DownOutlined />
                     </a>
 

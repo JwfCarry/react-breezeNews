@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react'
 import UserForm from '../../../components/user-manage/UserForm';
-import { Table, Button, Modal, Switch, Tag } from 'antd'
+import { Table, Button, Modal, Switch, Tag, notification } from 'antd'
 import { DeleteOutlined, EditOutlined, ExclamationCircleOutlined, SearchOutlined } from '@ant-design/icons';
 import axios from 'axios'
 const { confirm } = Modal;
@@ -136,8 +136,19 @@ function UserList() {
     }
     //确定删除事件
     const deleteHandle = (item) => {
-        setDataSource(dataSource.filter(data => data.id !== item.id)); //删除此用户 视图更新
-        axios.delete(`/users/${item.id}`).then(setRefresh) //后端删除 重新请求
+        axios.delete(`/users/${item.id}`).then(setRefresh).then(() => {
+            notification['success']({
+                message: `系统消息`,
+                description: (
+                    <div>
+                        删除成功！已从系统中<span style={{ color: '#7546c9' }}>删除</span>此用户
+                    </div>
+                ),
+                placement: "topRight",
+                duration: '2',
+                top: '60px'
+            });
+        }) //后端删除 重新请求
     }
     //添加用户 [确定]按钮事件
     const addHandleOk = () => {

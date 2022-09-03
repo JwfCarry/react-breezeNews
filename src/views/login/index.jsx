@@ -18,9 +18,9 @@ function Login() {
         })
     }
     return (
-        <div style={{ background: 'rgb(35, 39, 65)', height: "100%" }}>
+        <div style={{ background: '#c8c4ec', height: "100%" }}>
             <div className="formContainer">
-                <div className="logintitle">全球新闻发布管理系统</div>
+                <div className="logintitle">BreezeNews业务管理系统</div>
                 <Form
                     name="normal_login"
                     className="login-form"
@@ -28,18 +28,18 @@ function Login() {
                 >
                     <Form.Item
                         name="username"
-                        rules={[{ required: true, message: 'Please input your Username!' }]}
+                        rules={[{ required: true, message: '请输入您的用户名！' }]}
                     >
-                        <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Username" />
+                        <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="用户名" />
                     </Form.Item>
                     <Form.Item
                         name="password"
-                        rules={[{ required: true, message: 'Please input your Password!' }]}
+                        rules={[{ required: true, message: '请输入您的密码' }]}
                     >
                         <Input
                             prefix={<LockOutlined className="site-form-item-icon" />}
                             type="password"
-                            placeholder="Password"
+                            placeholder="密码"
                         />
                     </Form.Item>
                     <Form.Item>
@@ -48,6 +48,26 @@ function Login() {
                         </Button>
                     </Form.Item>
                 </Form>
+            </div>
+            <div className='donghua'>
+                <div className="square">
+                    <ul>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                    </ul>
+                </div>
+                <div className="circle">
+                    <ul>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                    </ul>
+                </div>
             </div>
         </div>
     )

@@ -47,7 +47,7 @@ function Home() {
         // 指定图表的配置项和数据
         var option = {
             title: {
-                text: '新闻发布数量'
+                text: '新闻发布数据'
             },
             tooltip: {},
             legend: {
@@ -194,11 +194,11 @@ function Home() {
 
             <div ref={barRef} style={{
                 width: '45%',
-                height: "350px",
+                height: "340px",
                 marginTop: "20px",
                 border: '1px solid #f0f0f0',
                 borderRadius: '15px',
-                padding: '5px'
+                padding: '10px'
             }}></div>
             <Drawer
                 width="500px"
