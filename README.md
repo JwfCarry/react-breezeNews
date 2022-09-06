@@ -34,8 +34,7 @@
 
 * 项目展示
 
-![image]([https://github.com/MaiEmily/map/blob/master/public/image/20190528145810708.png](https://github.com/JwfCarry/react-breezeNews/blob/main/src/assets/images/image-20220906103746829.png))
-
+![image]([https://github.com/MaiEmily/map/blob/master/public/image/20190528145810708.png]
 ...
 
 * 项目启动
