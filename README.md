@@ -34,11 +34,7 @@
 
 * 项目展示
 
-![image-20220906103746829](C:\Users\86152\AppData\Roaming\Typora\typora-user-images\image-20220906103746829.png)
-
-​	![image-20220906110553457](C:\Users\86152\AppData\Roaming\Typora\typora-user-images\image-20220906110553457.png)
-
-![image-20220906110629330](C:\Users\86152\AppData\Roaming\Typora\typora-user-images\image-20220906110629330.png)
+![image](https://github.com/MaiEmily/map/blob/master/public/image/20190528145810708.png)
 
 ...
 
