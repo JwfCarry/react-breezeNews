@@ -34,7 +34,7 @@
 
 * 项目展示
 
-![image]([https://github.com/JwfCarry/react-breezeNews/blob/main/src/assets/images/image-20220906103746829.png]
+![image](https://github.com/JwfCarry/react-breezeNews/blob/main/src/assets/images/image-20220906103746829.png)
 ...
 
 * 项目启动
