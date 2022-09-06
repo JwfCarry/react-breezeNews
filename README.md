@@ -1,70 +1,81 @@
-# Getting Started with Create React App
+# 项目简介
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### 一、项目描述
 
-## Available Scripts
+* 项目简介
 
-In the project directory, you can run:
+  BreezeNews业务管理系统是一个基于`React`开发的新闻后台管理系统，具有用户登录、用户管理、权限管理、新闻撰写、审核新闻、发布管理等功能模块。
 
-### `npm start`
+* 目录结构描述
 
-Runs the app in the development mode.\
-Open []() to view it in your browser.
+  ```
+  ├── public  
+  ├── node_modules // 依赖的第三方包
+  ├── src // 源代码
+  │   └── 
+  │       ├── components // 通用组件
+  │       ├── assets // 公共图片、css资源
+  │       ├── router // 路由配置
+  │       ├── store // mobx公共数据
+  │       ├── util// axios配置
+  │       ├── views // 路由主页
+  │       ├── App.less // 样式
+  │       ├── App.js // 
+  │       ├── setupProxy.js //react脚手架代理
+  │       └── index.js 项目入口文件
+  ├── db.json // 后端Json数据
+  ├── .gitignore // 不纳入 git 版本控制的 /文件夹?/ 列表
+  ├── package.json // 项目信息文件
+  ├── package-lock.json 
+  ├──yarn.lock 
+  └── README.md // 说明
+  
+  ```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+* 项目展示
 
-### `npm test`
+![image-20220906103746829](C:\Users\86152\AppData\Roaming\Typora\typora-user-images\image-20220906103746829.png)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+​	![image-20220906110553457](C:\Users\86152\AppData\Roaming\Typora\typora-user-images\image-20220906110553457.png)
 
-### `npm run build`
+![image-20220906110629330](C:\Users\86152\AppData\Roaming\Typora\typora-user-images\image-20220906110629330.png)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+...
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+* 项目启动
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+  1.安装项目依赖
 
-### `npm run eject`
+  ```js
+  yarn
+  ```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+  2.安装json-server
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+  ```js
+  yarn add json-server
+  ```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+  3.在项目目录中调用终端启动json-server
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+  ```
+  json-server --watch --port 3000 db.json
+  ```
 
-## Learn More
+  4.启动项目
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### 二、技术栈
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+* React
+* React-router
+* mobx
+* Ant Design
+* less
+* axios
+* echarts
+* json-server
 
-### Code Splitting
+   ...
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
-### Analyzing the Bundle Size
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
